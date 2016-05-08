@@ -1,5 +1,5 @@
 var fs = require("fs");
-fs.readFile("foo.txt", "utf8", function(error, data) {
+fs.readFile("readme.md", "utf8", function(error, data) {
  if (error) {
  throw error;
  }
