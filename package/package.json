@@ -1,0 +1,11 @@
+{
+  "name": "myfirstpackage",
+  "version": "1.0.0",
+  "description": "My first package in node",
+  "main": "index.js",
+  "scripts": {
+ "start" : "node start.js",   "test": "echo \"No test specified\""
+  },
+  "author": "Rajesh",
+  "license": "MIT"
+}
