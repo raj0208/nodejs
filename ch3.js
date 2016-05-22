@@ -6,7 +6,7 @@ fs.readFile("readme.md", "utf8", function(error, data) {
  console.log(data);
 });
 console.log("Reading file...");
-*/
+*/ 
 //================================================
 /*
 var fs = require("fs");
@@ -201,7 +201,7 @@ async.parallel({
     },
     three: function (callback) {
         setTimeout(function () {
-            console.log("PTask 3");
+            console.log("PTask 3 ");
             callback(null, "P3");
         }, 100);
     }
