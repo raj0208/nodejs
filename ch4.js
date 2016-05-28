@@ -1,8 +1,8 @@
 var events = require("events");
- var emitter = new events.EventEmitter();
-var EventEmitter = events.EventEmitter;
-var MyEventEmitter = events.EventEmitter;
 var util = require("util");
+var fs = require("fs");
+var emitter = new events.EventEmitter();
+var EventEmitter = events.EventEmitter;
 
 // var username = "colin";
 // var password = "password";
@@ -61,13 +61,13 @@ var util = require("util");
 // console.log("======  Inheriting event emitters ======");
 
 // function UserEventEmitter() {
-//     MyEventEmitter.call(this);
+//     EventEmitter.call(this);
     
 //     this.addUser = function(userName, password) {
 //         this.emit("userAdded", userName, password);
 //     };    
 // };
-// util.inherits(UserEventEmitter, MyEventEmitter);
+// util.inherits(UserEventEmitter, EventEmitter);
 
 
 // var user = new UserEventEmitter();
@@ -81,39 +81,83 @@ var util = require("util");
 // user.addUser(userName, password);
 // console.log(user instanceof MyEventEmitter);
 
-console.log("========================================");
-console.log("======  Using Events to avoid Callback Hell ======\n");
+// console.log("========================================");
+// console.log("======  Using Events to avoid Callback Hell ======\n");
 
-var fs = require("fs");
+// function FileReader(fileName) {
+//     var _self = this;
+    
+//     EventEmitter.call(_self);
+    
+//     _self.on("stats", function() {
+//         fs.stat(fileName, function(error, stats) {
+//             if (!error && stats.isFile()) {
+//                 _self.emit("read");                
+//             }
+//         });
+//     });
+    
+//     _self.on("read", function() {
+//         fs.readFile(fileName, "utf8", function(error,data) {
+//             if (!error && data) {
+//                 console.log(data);
+//             }
+//         });
+//     });
+    
+//     fs.exists(fileName, function(exists) {
+//         if (exists) {
+//             _self.emit("stats");
+//         }
+//         else {
+//             console.log("File '" + fileName + "' is not available.");    
+//         }
+//     });
+// };
 
-function FileReader(fileName) {
-    var _self = this;
-    
-    EventEmitter.call(_self);
-    
-    _self.on("stats", function() {
-        fs.stat(fileName, function(error, stats) {
-            if (!error && stats.isFile()) {
-                _self.emit("read");                
-            }
-        });
-    });
-    
-    _self.on("read", function() {
-        fs.readFile(fileName, "utf8", function(error,data) {
-            if (!error && data) {
-                console.log(data);
-            }
-        });
-    });
-    
-    fs.exists(fileName, function(exists) {
-        if (exists) {
-            _self.emit("stats");
-        }
+// util.inherits(FileReader, EventEmitter);
+
+// var reader = new FileReader("d:\\test.txt");
+
+// console.log("========================================");
+// console.log("======  Using Events to avoid Callback Hell ======\n");
+
+// console.log("======  setInterval");
+// var intervalId = setInterval(function(foo, bar) {
+// console.log(foo + " " + bar);
+// }, 1000, "foo", "bar");
+
+// console.log("======  setTimeout");
+// setTimeout(function(intervalId) {
+//     console.log("Inside setTimeout");
+//     clearInterval(intervalId);
+// }, 3000);
+
+// intervalId.unref();
+
+// console.log("========== setImmediate ");
+// setImmediate(function() {
+//     console.log("In immediate function");
+// });
+
+// console.log("========================================");
+// console.log("======  Using process.nextTick ======\n");
+
+// function getCallback(f, b) {
+//     return function cb() {
+//         console.log(f + " " + b);
+//     };
+// };
+
+// process.nextTick(getCallback("rajesh", "sharma"));
+
+console.log("======  Asynchronous callback functions ======\n");
+
+function add(x, y, cb) {
+    process.nextTick( function() {
+        cb(x + y);
     });
 };
 
-util.inherits(FileReader, EventEmitter);
-
-var reader = new FileReader("d:\DrBhimraoAmbedkarUniversity.txt");
+add(2, 3, console.log);
+console.log("The sum is : ");    
